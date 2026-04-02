@@ -15,7 +15,22 @@ io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
         io.emit('chat message', msg);
     });
+
 });
+
+io.on('connection', (socket) => {
+    socket.onAny((eventName, ...args) => {
+        console.log(eventName);
+        console.log(args);
+    });
+});
+
+io.on('connection', (socket) => {
+    socket.join('some room');
+    io.to('some room').emit('hello', 'world');
+    io.except('some room').emit('hello', 'world');
+    socket.leave('some room');
+})
 
 server.listen(3000, () => {
     console.log("server is running on http://localhost:3000");

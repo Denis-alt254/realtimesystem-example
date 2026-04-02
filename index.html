@@ -34,5 +34,12 @@
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
   });
+
+  try {
+    const response = socket.timeout(5000).emit('hello', 1, {'country': 'kenya'});
+    console.log(response.status);   
+  } catch (error) {
+    console.log({message: message.error})
+  }
 </script>
 </html>
